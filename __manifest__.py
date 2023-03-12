@@ -10,13 +10,15 @@
     'qweb': [],
     'description': False,
     'images': [],
-    'version': '1.0.1',
+    'version': '1.0.1.1',
     'category': 'Manufacturing',
     'demo': [],
     'depends': ['mrp','product'],
     'data': [
         'views/mrp_production_views.xml',
-        'views/product_packaging_views.xml'
+        'views/product_packaging_views.xml',
+        #'report/mrp_report_views_main.xml',
+        #'report/mrp_production_templates.xml'
     ],
     'license': 'LGPL-3',
 }

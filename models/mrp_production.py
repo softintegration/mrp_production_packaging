@@ -48,11 +48,11 @@ class MrpProduction(models.Model):
                                                                                       self.product_uom_id)
         # this is the number of packaging that we have to find
         try:
-            ref_packaging_nbr = int(self.product_uom_qty / qty_by_packaging)
+            ref_packaging_nbr = int(self.qty_producing / qty_by_packaging)
         except ZeroDivisionError as e:
             raise ValidationError(_("Contained Quantity must be positive in %s!") % self.product_packaging_id.name)
         # we have to get the remainder
-        remaining_qty = self.product_uom_qty % qty_by_packaging
+        remaining_qty = self.qty_producing % qty_by_packaging
         # if there is remaining qty so we have to add package
         if float_compare(remaining_qty, 0.0, precision_rounding=self.product_uom_id.rounding) > 0:
             ref_packaging_nbr += 1
