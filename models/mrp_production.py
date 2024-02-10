@@ -18,8 +18,6 @@ class MrpProduction(models.Model):
                                    states={'done': [('readonly', True)], 'cancel': [('readonly', True)]}, copy=False)
     incomplete_qty = fields.Float(string='Incomplete Qty', store=True, compute='_get_incomplete_qty')
 
-
-
     @api.depends('product_id')
     def _compute_use_packaging(self):
         for each in self:
@@ -62,3 +60,9 @@ class MrpProduction(models.Model):
             raise ValidationError(
                 _("Nbr of packaging in Manufacturing order %s doesn't match the Quantity and Contained Quantity in %s ") % (
                 self.name, self.product_packaging_id.name))
+
+    def write(self, vals):
+        res = super(MrpProduction,self).write(vals)
+        for move_finished in self.mapped("move_finished_ids"):
+            move_finished.product_packaging_id = move_finished.production_id.product_packaging_id
+        return res
