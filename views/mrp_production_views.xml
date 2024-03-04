@@ -16,7 +16,7 @@
                        attrs="{'invisible':['|',('use_packaging','=',False),('product_packaging_id','=',False)]}"
                        groups="product.group_stock_packaging"/>
                 <field name="packaging_nbr"
-                       attrs="{'invisible':[('use_packaging','=',False)]}"
+                       attrs="{'invisible':[('use_packaging','=',False)],'readonly': ['|', ('state', '=', 'cancel'), '&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}"
                        groups="product.group_stock_packaging"/>
             </xpath>
         </field>
