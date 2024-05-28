@@ -10,10 +10,10 @@
     'qweb': [],
     'description': False,
     'images': [],
-    'version': '1.0.1.3',
+    'version': '1.0.1.4',
     'category': 'Manufacturing/Manufacturing',
     'demo': [],
-    'depends': ['mrp','product'],
+    'depends': ['mrp_production_fix_replan','product'],
     'data': [
         'views/mrp_production_views.xml',
         'views/product_packaging_views.xml',
