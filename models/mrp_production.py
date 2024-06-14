@@ -23,11 +23,11 @@ class MrpProduction(models.Model):
         for each in self:
             each.use_packaging = each.picking_type_id.control_product_packaging and len(each.product_id.packaging_ids) > 0
 
-    @api.depends('product_uom_qty', 'qty_by_packaging')
+    @api.depends('qty_producing', 'qty_by_packaging')
     def _get_incomplete_qty(self):
         for each in self:
             try:
-                each.incomplete_qty = each.product_uom_qty % each.qty_by_packaging
+                each.incomplete_qty = each.qty_producing % each.qty_by_packaging
             except ZeroDivisionError as ex:
                 each.incomplete_qty = 0.0
 
